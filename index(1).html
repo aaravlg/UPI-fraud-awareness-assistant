@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UPI Fraud Awareness Assistant | team_1473_0041</title>
+<meta name="description" content="A chatbot that works as a personal safety coach and helps people check a suspicious UPI situation before they lose money.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDF1F6;
+  --card:#FFFFFF;
+  --ink:#16213A;
+  --muted:#55627C;
+  --line:#D3DBE8;
+  --warn:#F4A300;
+  --warn-soft:#FFF1CC;
+  --safe:#0E8F7E;
+  --safe-soft:#D9F2EE;
+  --danger:#C8382F;
+  --display:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+  --body:"Figtree","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* top bar */
+header{padding:22px 0}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:700;font-size:1.05rem}
+.badge{font-size:.9rem;color:var(--muted);border:1.5px solid var(--line);padding:6px 14px;border-radius:99px;background:var(--card)}
+
+/* hero */
+.hero{padding:40px 0 88px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:1.02;letter-spacing:-.025em}
+.lede{margin-top:24px;max-width:34rem;font-size:1.2rem;color:var(--muted)}
+.cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;font-family:var(--display);font-weight:700;font-size:1.05rem;text-decoration:none;background:var(--ink);color:#fff;padding:15px 28px;border-radius:12px;transition:transform .15s ease,background .15s ease}
+.btn:hover{background:#0b1226;transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+
+/* phone mock */
+.phone{background:var(--card);border:2px solid var(--ink);border-radius:30px;padding:22px 20px 20px;box-shadow:10px 10px 0 var(--ink);max-width:370px;margin-left:auto;animation:land .7s cubic-bezier(.2,.9,.3,1) both}
+@keyframes land{from{opacity:0;transform:translateY(-26px) rotate(-1.5deg)}to{opacity:1;transform:none}}
+.phone .app{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);margin-bottom:14px}
+.phone .dot{width:26px;height:26px;border-radius:8px;background:var(--warn);display:grid;place-items:center;font-weight:800;color:var(--ink);font-size:.8rem}
+.req{background:var(--warn-soft);border-radius:16px;padding:16px}
+.req small{display:block;color:var(--muted);font-size:.82rem}
+.req .name{font-weight:600;margin-top:2px}
+.req .amt{font-family:var(--display);font-weight:800;font-size:2.2rem;margin:6px 0 2px;letter-spacing:-.02em}
+.req .note{font-size:.92rem}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.acts button{font:inherit;font-weight:600;padding:12px;border-radius:12px;border:2px solid var(--ink);cursor:pointer;background:var(--card);color:var(--ink);transition:background .15s}
+.acts .pay{background:var(--ink);color:#fff}
+.acts button:hover{background:var(--line)}
+.acts .pay:hover{background:#0b1226}
+.verdict{margin-top:14px;padding:13px 14px;border-radius:12px;font-size:.95rem;min-height:3.4em;background:var(--paper);color:var(--muted)}
+.verdict.stop{background:#FBE0DD;color:#7d1f19}
+.verdict.good{background:var(--safe-soft);color:#075e52}
+.hint{margin-top:14px;font-size:.88rem;color:var(--muted);text-align:center;max-width:370px;margin-left:auto}
+
+/* sections */
+section{padding:84px 0;border-top:1.5px solid var(--line)}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:28px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.about p{font-size:1.2rem;line-height:1.65}
+.about p+p{margin-top:18px;color:var(--muted);font-size:1.05rem}
+.facts{display:grid;gap:14px;align-content:start}
+.fact{background:var(--card);border-left:6px solid var(--warn);padding:16px 20px;border-radius:0 14px 14px 0}
+.fact:nth-child(2){border-color:var(--safe)}
+.fact:nth-child(3){border-color:var(--ink)}
+.fact b{font-family:var(--display);font-size:1.15rem;display:block}
+.fact span{color:var(--muted);font-size:.98rem}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.person{display:flex;gap:18px;align-items:center;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:22px}
+.av{flex:none;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.2rem;color:var(--ink)}
+.person:nth-child(1) .av{background:var(--warn)}
+.person:nth-child(2) .av{background:#BFD7F5}
+.person:nth-child(3) .av{background:var(--safe-soft)}
+.person:nth-child(4) .av{background:#F6D4CF}
+.person h3{font-family:var(--display);font-size:1.2rem;line-height:1.2}
+.person p{color:var(--muted);font-size:.98rem;margin-top:3px}
+.teamname{margin-bottom:30px;color:var(--muted)}
+.teamname code{font-family:ui-monospace,Consolas,monospace;font-size:.95em;background:var(--card);border:1.5px solid var(--line);padding:3px 10px;border-radius:8px;color:var(--ink)}
+
+/* chatbot */
+.try{background:var(--ink);color:#fff;border-top:none}
+.try .wrap{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.try h2{margin-bottom:10px}
+.try p{color:#B9C4DA;max-width:32rem}
+.try .btn{background:var(--warn);color:var(--ink)}
+.try .btn:hover{background:#ffb81f}
+
+footer{padding:30px 0 44px;color:var(--muted);font-size:.92rem;background:var(--ink);border-top:1px solid #2A3753}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#8f9cb8}
+
+@media (max-width:860px){
+  .hero .wrap,.about{grid-template-columns:1fr;gap:40px}
+  .phone,.hint{margin-left:0;margin-right:auto}
+  .team{grid-template-columns:1fr}
+  section{padding:64px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  .phone{animation:none}
+  html{scroll-behavior:auto}
+  .btn{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="brand">team_1473_0041</span>
+    <span class="badge">HCL Jigsaw 7.0 &middot; Round 2 &middot; Class 9</span>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Check it before you pay.</h1>
+      <p class="lede">The UPI Fraud Awareness Assistant is a chatbot that acts as your personal safety coach. Describe a suspicious message, call or payment request, and find out whether it is a scam before any money leaves your account.</p>
+      <div class="cta-row">
+        <a class="btn" href="#try">Try the chatbot</a>
+        <a class="btn ghost" href="#about">About the project</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="phone" aria-label="Example of a fake UPI payment request">
+        <div class="app"><span class="dot">₹</span> Payment request</div>
+        <div class="req">
+          <small>Request from</small>
+          <div class="name">Lucky Draw Prize Desk</div>
+          <div class="amt">₹4,999</div>
+          <div class="note">“Approve this to receive your ₹50,000 prize.”</div>
+        </div>
+        <div class="acts">
+          <button type="button" id="decline">Decline</button>
+          <button type="button" class="pay" id="pay">Pay</button>
+        </div>
+        <div class="verdict" id="verdict" role="status" aria-live="polite">Would you approve this?</div>
+      </div>
+      <p class="hint">A sample scam. Tap a button to see what happens.</p>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h2>About the project</h2>
+      <p>UPI has changed how India pays, but many people still do not recognise common scam tricks until it is too late. Our chatbot lets a person describe a suspicious situation and tells them, in plain language, whether it is likely a scam.</p>
+      <p>It covers five real UPI fraud scenarios and has been tested with real people, with honest findings on what they learned.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>10 billion+</b><span>UPI transactions are processed in India every month.</span></div>
+      <div class="fact"><b>5 scenarios</b><span>Real fraud situations the chatbot can recognise and explain.</span></div>
+      <div class="fact"><b>Before, not after</b><span>Built to be used before someone falls for a scam.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <h2>Meet the team</h2>
+    <p class="teamname">Team name: <code>team_1473_0041</code></p>
+    <div class="team">
+      <div class="person">
+        <div class="av" aria-hidden="true">KG</div>
+        <div><h3>Kalash Gangwani</h3><p>Team Coordinator</p></div>
+      </div>
+      <div class="person">
+        <div class="av" aria-hidden="true">RC</div>
+        <div><h3>Reyaansh Vinayak Chauhan</h3><p>Communication Strategist</p></div>
+      </div>
+      <div class="person">
+        <div class="av" aria-hidden="true">AG</div>
+        <div><h3>Aarav Latish Gianchandani</h3><p>Research Analyst</p></div>
+      </div>
+      <div class="person">
+        <div class="av" aria-hidden="true">MB</div>
+        <div><h3>Myra Dilip Bagrecha</h3><p>Technical Designer</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="try" id="try">
+  <div class="wrap">
+    <div>
+      <h2>Got a suspicious message?</h2>
+      <p>Open the assistant, describe what happened, and get a clear answer before you pay.</p>
+    </div>
+    <!-- TODO: replace "#" below with the link to the chatbot -->
+    <a class="btn" href="#" id="chatbot-link" rel="noopener">Open the chatbot</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>UPI Fraud Awareness Assistant</span>
+    <span>HCL Jigsaw 7.0 &middot; Round 2 &middot; Class 9</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var v=document.getElementById('verdict');
+  document.getElementById('pay').addEventListener('click',function(){
+    v.className='verdict stop';
+    v.textContent='Stop. You never pay to receive money. A real prize never asks you to approve a request.';
+  });
+  document.getElementById('decline').addEventListener('click',function(){
+    v.className='verdict good';
+    v.textContent='Good call. Declining is safe. Report the request in your UPI app and tell someone you trust.';
+  });
+})();
+</script>
+</body>
+</html>
