@@ -2,191 +2,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UPI Fraud Awareness Assistant</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spot the Scam | UPI Safety Assistant</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #16213a;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    header {
-      background: #101827;
-      color: white;
-      padding: 20px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
+header {
+  background: #152b4a;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    header a {
-      color: #dbeafe;
-      text-decoration: none;
-    }
+header a {
+  color: white;
+  text-decoration: none;
+}
 
-    main {
-      max-width: 850px;
-      margin: 70px auto;
-      padding: 20px;
-      text-align: center;
-    }
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  min-height: 0;
+}
 
-    .tag {
-      color: #2563eb;
-      font-weight: bold;
-      font-size: 13px;
-    }
+.heading {
+  text-align: center;
+  padding: 8px;
+}
 
-    h1 {
-      font-size: 42px;
-      margin: 18px 0;
-    }
+.heading h1 {
+  margin: 4px;
+  color: #152b4a;
+}
 
-    .intro {
-      color: #64748b;
-      line-height: 1.7;
-      font-size: 17px;
-    }
+.heading p {
+  margin: 4px;
+  color: #586579;
+}
 
-    .panel {
-      background: white;
-      padding: 30px;
-      margin-top: 35px;
-      border-radius: 18px;
-      box-shadow: 0 10px 35px #00000010;
-    }
+.chat-area {
+  flex: 1;
+  min-height: 0;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #dce3ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
 
-    button {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.chat-area button {
+  background: #1769e0;
+  color: white;
+  border: 0;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    .note {
-      color: #64748b;
-      font-size: 13px;
-      line-height: 1.6;
-      margin-top: 25px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #64748b;
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        padding: 16px;
-        flex-wrap: wrap;
-      }
-
-      h1 {
-        font-size: 32px;
-      }
-
-      main {
-        margin: 35px auto;
-      }
-
-      .panel {
-        padding: 22px;
-      }
-    }
-  </style>
+footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #657187;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <strong>UPI Fraud Awareness Assistant</strong>
-    <a href="./index.html">← Back to website</a>
-  </header>
+<header>
+  <strong>SPOT THE SCAM</strong>
+  <a href="./index.html">← Back to website</a>
+</header>
 
-  <main>
-    <div class="tag">INTERACTIVE AWARENESS ASSISTANT</div>
+<main>
+  <div class="heading">
+    <h1>UPI Fraud Awareness Assistant</h1>
+    <p>Ask before you act. Stay alert. Stay safe.</p>
+  </div>
 
-    <h1>Ask Before You Act.</h1>
-
-    <p class="intro">
-      Explore common UPI fraud situations, identify warning signs,
-      and learn how to protect yourself from digital payment scams.
-    </p>
-
-    <section class="panel">
+  <section class="chat-area">
+    <div>
       <h2>Your Safety Assistant</h2>
+      <p>Click below to start your conversation.</p>
+      <button onclick="openChat()">Open Chatbot</button>
+    </div>
+  </section>
+</main>
 
-      <p>
-        Your chatbot is loading. You can start a conversation
-        using the chat window.
-      </p>
+<footer>
+  Never share your UPI PIN, OTP or banking password.
+</footer>
 
-      <button id="openChat" type="button">
-        Open Chatbot
-      </button>
-    </section>
+<script src="https://code.tidio.co/uvsqat0eqd0u7nd5w9icj2lucoqlj7ql.js" async></script>
 
-    <p class="note">
-      Safety reminder: Never share your UPI PIN, OTP,
-      password or banking credentials in a chat.
-      This assistant provides awareness guidance and is
-      not an official bank verification service.
-    </p>
-  </main>
+<script>
+function openChat() {
+  if (window.tidioChatApi) {
+    window.tidioChatApi.open();
+  }
+}
 
-  <footer>
-    UPI Fraud Awareness Assistant | Student Project
-  </footer>
-
-  <!-- Tidio installation -->
-  <script
-    src="https://code.tidio.co/uvsqat0eqd0u7nd5w9icj2lucoqlj7ql.js"
-    async>
-  </script>
-
-  <!-- Open chatbot automatically -->
-  <script>
-    (function () {
-      function onTidioReady() {
-        window.tidioChatApi.open();
-      }
-
-      if (window.tidioChatApi) {
-        window.tidioChatApi.on("ready", onTidioReady);
-      } else {
-        document.addEventListener(
-          "tidioChat-ready",
-          onTidioReady
-        );
-      }
-
-      document.getElementById("openChat")
-        .addEventListener("click", function () {
-          if (window.tidioChatApi) {
-            window.tidioChatApi.show();
-            window.tidioChatApi.open();
-          }
-        });
-    })();
-  </script>
+document.addEventListener("tidioChat-ready", function () {
+  window.tidioChatApi.open();
+});
+</script>
 
 </body>
 </html>
