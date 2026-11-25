@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spot the Scam | UPI Safety Assistant</title>
+<title>Spot the Scam | Safety Assistant</title>
 
 <style>
 * {
@@ -13,78 +13,183 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7fb;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #29334b;
+  background: #faf7ff;
 }
 
 header {
-  background: #152b4a;
-  color: white;
-  padding: 16px 24px;
+  padding: 18px 6%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,.85);
+  border-bottom: 1px solid #eee8f6;
+}
+
+.logo {
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #6352a1;
 }
 
 header a {
-  color: white;
   text-decoration: none;
+  color: #6352a1;
+  font-weight: 600;
 }
 
 main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
-  min-height: 0;
+  max-width: 1150px;
+  margin: auto;
+  padding: 35px 22px 50px;
 }
 
-.heading {
+.hero {
+  background: linear-gradient(120deg,#e9e3ff,#ffe9e2,#e0f4ec);
+  border-radius: 28px;
+  padding: 42px 35px;
   text-align: center;
-  padding: 8px;
+  position: relative;
+  overflow: hidden;
 }
 
-.heading h1 {
-  margin: 4px;
-  color: #152b4a;
-}
-
-.heading p {
-  margin: 4px;
-  color: #586579;
-}
-
-.chat-area {
-  flex: 1;
-  min-height: 0;
+.tag {
+  display: inline-block;
   background: white;
-  border-radius: 16px;
-  border: 1px solid #dce3ed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
+  color: #7562ad;
+  border-radius: 30px;
+  padding: 8px 17px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-.chat-area button {
-  background: #1769e0;
-  color: white;
-  border: 0;
-  padding: 14px 28px;
-  border-radius: 8px;
+.hero h1 {
+  font-size: clamp(32px,5vw,52px);
+  margin: 17px 0 10px;
+  color: #44366f;
+}
+
+.hero h1 span {
+  color: #d27676;
+}
+
+.hero p {
+  max-width: 620px;
+  margin: auto;
+  line-height: 1.7;
+  color: #55536b;
   font-size: 16px;
-  cursor: pointer;
+}
+
+.section-title {
+  text-align: center;
+  margin: 38px 0 20px;
+}
+
+.section-title h2 {
+  margin-bottom: 6px;
+  color: #44366f;
+}
+
+.section-title p {
+  color: #77758b;
+  margin-top: 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+}
+
+.card {
+  border-radius: 20px;
+  padding: 23px;
+  min-height: 170px;
+}
+
+.card:nth-child(1) { background: #ffe9e7; }
+.card:nth-child(2) { background: #e8e5ff; }
+.card:nth-child(3) { background: #e2f4e9; }
+
+.emoji {
+  font-size: 30px;
+}
+
+.card h3 {
+  margin: 12px 0 7px;
+  color: #443b60;
+}
+
+.card p {
+  color: #656276;
+  line-height: 1.55;
+  font-size: 14px;
+  margin: 0;
+}
+
+.safety {
+  margin-top: 28px;
+  background: white;
+  border: 1px solid #eee7f5;
+  border-radius: 22px;
+  padding: 25px;
+  text-align: center;
+}
+
+.safety h2 {
+  color: #6352a1;
+  margin-top: 0;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.step {
+  background: #f2effb;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-weight: 700;
+  color: #6352a1;
+}
+
+.warning {
+  margin-top: 22px;
+  padding: 17px;
+  background: #fff2e8;
+  border-radius: 16px;
+  text-align: center;
+  color: #8b5741;
+  line-height: 1.6;
+  font-size: 14px;
 }
 
 footer {
   text-align: center;
-  padding: 10px;
+  padding: 22px;
+  color: #88849a;
   font-size: 12px;
-  color: #657187;
+}
+
+@media(max-width:700px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 32px 20px;
+  }
+
+  main {
+    padding: 22px 15px 35px;
+  }
 }
 </style>
 </head>
@@ -92,38 +197,73 @@ footer {
 <body>
 
 <header>
-  <strong>SPOT THE SCAM</strong>
+  <div class="logo">✦ SPOT THE SCAM</div>
   <a href="./index.html">← Back to website</a>
 </header>
 
 <main>
-  <div class="heading">
-    <h1>UPI Fraud Awareness Assistant</h1>
-    <p>Ask before you act. Stay alert. Stay safe.</p>
+
+  <section class="hero">
+    <div class="tag">YOUR DIGITAL SAFETY COMPANION</div>
+    <h1>Ask Before <span>You Act.</span></h1>
+    <p>
+      One moment of awareness can prevent a costly mistake.
+      Have a suspicious UPI message, payment request or QR code?
+      Talk to our safety assistant and learn how to stay protected.
+    </p>
+  </section>
+
+  <div class="section-title">
+    <h2>Know the Warning Signs</h2>
+    <p>Three common tricks to watch out for</p>
   </div>
 
-  <section class="chat-area">
-    <div>
-      <h2>Your Safety Assistant</h2>
-      <p>Click below to start your conversation.</p>
-      <button onclick="openChat()">Open Chatbot</button>
+  <section class="cards">
+
+    <div class="card">
+      <div class="emoji">📱</div>
+      <h3>Fake QR Codes</h3>
+      <p>Be careful. Scanning a QR code to receive money is usually unnecessary. Check before you scan.</p>
+    </div>
+
+    <div class="card">
+      <div class="emoji">🔐</div>
+      <h3>OTP Scams</h3>
+      <p>Never share your OTP, UPI PIN or banking credentials with anyone, even if they claim to be from your bank.</p>
+    </div>
+
+    <div class="card">
+      <div class="emoji">⚠️</div>
+      <h3>Collect Requests</h3>
+      <p>Receiving money should not require you to enter your UPI PIN. Verify every payment request carefully.</p>
+    </div>
+
+  </section>
+
+  <section class="safety">
+    <h2>Your 3-Step Safety Rule</h2>
+    <div class="steps">
+      <div class="step">🛑 STOP</div>
+      <div class="step">💭 THINK</div>
+      <div class="step">✅ VERIFY</div>
     </div>
   </section>
+
+  <div class="warning">
+    <strong>Remember:</strong> Never share your UPI PIN, OTP,
+    passwords or confidential banking details.
+    When in doubt, don't proceed.
+  </div>
+
 </main>
 
 <footer>
-  Never share your UPI PIN, OTP or banking password.
+  SPOT THE SCAM · Promoting awareness, one transaction at a time.
 </footer>
 
 <script src="https://code.tidio.co/uvsqat0eqd0u7nd5w9icj2lucoqlj7ql.js" async></script>
 
 <script>
-function openChat() {
-  if (window.tidioChatApi) {
-    window.tidioChatApi.open();
-  }
-}
-
 document.addEventListener("tidioChat-ready", function () {
   window.tidioChatApi.open();
 });
