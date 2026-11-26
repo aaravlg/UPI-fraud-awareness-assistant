@@ -1,9 +1,12 @@
+
+index.html
+100%
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UPI Fraud Awareness Assistant | team_1473_0041  </title>
+<title>UPI Fraud Awareness Assistant | team_1473_0041</title>
 <meta name="description" content="A chatbot that works as a personal safety coach and helps people check a suspicious UPI situation before they lose money.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +46,7 @@ header .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 h1{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:1.02;letter-spacing:-.025em}
 .lede{margin-top:24px;max-width:34rem;font-size:1.2rem;color:var(--muted)}
 .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.btn{display:inline-block;font-family:var(--display);font-weight:700;font-size:1.05rem;text-decoration:none;background:var(--ink);color:#fff;padding:15px 28px;border-radius:12px;transition:transform .15s ease,background .15s ease}
+.btn{display:inline-block;font-family:var(--display);font-weight:700;font-size:1.05rem;text-decoration:none;background:var(--ink);color:#fff;padding:15px 28px;border-radius:12px;transition:transform .15s ease,background .15s ease;cursor:pointer}
 .btn:hover{background:#0b1226;transform:translateY(-2px)}
 .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
 .btn.ghost:hover{background:var(--ink);color:#fff}
@@ -134,7 +137,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       <h1>Check it before you pay.</h1>
       <p class="lede">The UPI Fraud Awareness Assistant is a chatbot that acts as your personal safety coach. Describe a suspicious message, call or payment request, and find out whether it is a scam before any money leaves your account.</p>
       <div class="cta-row">
-       <a class="btn" href="./chat.html" target="_blank" rel="noopener noreferrer">Try the chatbot</a>
+        <a class="btn" href="#open-chat" data-open-chat>Try the chatbot</a>
         <a class="btn ghost" href="#about">About the project</a>
       </div>
     </div>
@@ -205,8 +208,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
       <h2>Got a suspicious message?</h2>
       <p>Open the assistant, describe what happened, and get a clear answer before you pay.</p>
     </div>
-    <!-- TODO: replace "#" below with the link to the chatbot -->
-<a class="btn" href="./chat.html" target="_blank" rel="noopener noreferrer">Open the chatbot</a>
+    <a class="btn" href="#open-chat" data-open-chat>Open the chatbot</a>
+  </div>
 </section>
 </main>
 
@@ -228,7 +231,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
     v.className='verdict good';
     v.textContent='Good call. Declining is safe. Report the request in your UPI app and tell someone you trust.';
   });
+
+  // Handle Tidio Chat button clicks
+  var pendingOpen = false;
+  document.addEventListener("tidioChat-ready", function () {
+    if (pendingOpen) {
+      window.tidioChatApi.open();
+      pendingOpen = false;
+    }
+  });
+
+  document.querySelectorAll('[data-open-chat]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (window.tidioChatApi) {
+        window.tidioChatApi.open();
+      } else {
+        pendingOpen = true;
+      }
+    });
+  });
 })();
 </script>
+
+<!-- Tidio Chat Script -->
+<script src="https://code.tidio.co/uvsqat0eqd0u7nd5w9icj2lucoqlj7ql.js" async></script>
 </body>
 </html>
+Displaying index.html.
